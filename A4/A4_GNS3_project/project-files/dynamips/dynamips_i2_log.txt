@@ -1,0 +1,10 @@
+Feb 21 11:24:34.523 HYPERVISOR: Release 0.2.23-amd64/Linux (tag 2023010200)
+Feb 21 11:24:34.523 HYPERVISOR: Started on IP = 127.0.0.1, TCP port = 40625.
+Feb 21 11:24:34.531 HYPERVISOR: exec_cmd: hypervisor version 
+Feb 21 11:24:34.531 HYPERVISOR: exec_cmd: hypervisor working_dir /home/student/GNS3/projects/A4/project-files/dynamips 
+Feb 21 11:24:34.531 GENERAL: working_dir=/home/student/GNS3/projects/A4/project-files/dynamips
+Feb 21 11:24:34.531 HYPERVISOR: exec_cmd: nio_bridge create Hub1 
+Feb 21 11:27:48.654 HYPERVISOR: exec_cmd: nio_bridge delete Hub1 
+Feb 21 11:27:48.654 HYPERVISOR: exec_cmd: hypervisor stop 
+Feb 21 11:27:48.745 HYPERVISOR: Stopped.
+Feb 21 11:27:48.745 GENERAL: reset done.

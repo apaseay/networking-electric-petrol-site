@@ -1,0 +1,106 @@
+hostname Switch7
+
+# Console
+line con 0
+ password MyConsole
+ logging synchronous
+ login
+ history size 10
+ exec-timeout 6 50
+exit
+
+line vty 0 15
+ exec-timeout 5 30
+ password MyTelnet
+ logging synchronous
+ login
+ history size 10
+exit
+
+
+# VLANs
+vlan 1
+ name ISP
+exit
+vlan 2
+ name Hosts
+exit
+vlan 3
+ name StaffRadio
+exit
+vlan 4
+ name PowerInfrastructure
+exit
+vlan 5
+ name TechnicalClients
+exit
+vlan 6
+ name InfrastructureServers
+exit
+vlan 7
+ name Telephony
+exit
+vlan 8
+ name HVACInfrastructure
+exit
+vlan 9
+ name Storage
+exit
+vlan 10
+ name NetMan
+exit
+vlan 11
+ name SecurityCameras
+exit
+vlan 12
+ name ServerOOBM
+exit
+vlan 13
+ name VLAN13
+exit
+vlan 14
+ name VLAN14
+exit
+vlan 15
+ name Routers
+exit
+vlan 16
+ name Links
+exit
+vlan 998
+ name ClusterChat
+exit
+vlan 999
+ name Native
+exit
+vlan 1000
+ name Discard
+exit
+
+
+# Access Ports
+int range gi0/0-3
+ description Clients
+ switchport access vlan 5
+ switchport port-security mac-address sticky
+ switchport port-security violation protect
+ negotiation auto
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+exit
+
+int range gi1/0-3
+ description Servers
+ switchport access vlan 6
+exit
+
+
+# Tagged Ports
+int range gi3/0-3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 2-16
+exit
+
+wr mem

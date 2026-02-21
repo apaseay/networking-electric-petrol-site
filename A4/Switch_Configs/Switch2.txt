@@ -1,0 +1,260 @@
+hostname Switch2
+
+# Console
+line con 0
+ password MyConsole
+ logging synchronous
+ login
+ history size 10
+ exec-timeout 6 50
+exit
+
+line vty 0 15
+ exec-timeout 5 30
+ password MyTelnet
+ logging synchronous
+ login
+ history size 10
+exit
+
+
+# VLANs
+
+vlan 1
+ name ISP
+ exit
+int vlan 1
+ description "interface to ISP"
+ ip address 10.39.1.2 255.255.255.0
+ vrrp 1 ip 10.39.1.20
+ vrrp 1 priority 200
+ vrrp 1 preempt
+ no shut
+ exit
+
+vlan 2
+ name Hosts
+ exit
+int vlan 2
+ description "interface to Hosts"
+ ip address 10.39.2.2 255.255.255.0
+ vrrp 2 ip 10.39.2.20
+ vrrp 2 priority 200
+ vrrp 2 preempt
+ no shut
+ exit
+
+vlan 3
+ name StaffRadio
+ exit
+int vlan 3
+ description "interface to Staff Radio"
+ ip address 10.39.3.2 255.255.255.0
+ vrrp 3 ip 10.39.3.20
+ vrrp 3 priority 200
+ vrrp 3 preempt
+ no shut
+ exit
+
+vlan 4
+ name PowerInfrastructure
+ exit
+int vlan 4
+ description "interface to Power Infrastructure"
+ ip address 10.39.4.2 255.255.255.0
+ vrrp 4 ip 10.39.4.20
+ vrrp 4 priority 200
+ vrrp 4 preempt
+ no shut
+ exit
+
+vlan 5
+ name TechnicalClients
+ exit
+int vlan 5
+ description "interface to Technical Clients"
+ ip address 10.39.5.2 255.255.255.0
+ vrrp 5 ip 10.39.5.20
+ vrrp 5 priority 200
+ vrrp 5 preempt
+ no shut
+ exit
+
+vlan 6
+ name InfrastructureServers
+ exit
+int vlan 6
+ description "interface to Infrastructure Servers"
+ ip address 10.39.6.2 255.255.255.0
+ vrrp 6 ip 10.39.6.20
+ vrrp 6 priority 200
+ vrrp 6 preempt
+ no shut
+ exit
+
+vlan 7
+ name Telephony
+ exit
+int vlan 7
+ description "interface to Telephony"
+ ip address 10.39.7.2 255.255.255.0
+ vrrp 7 ip 10.39.7.20
+ vrrp 7 priority 200
+ vrrp 7 preempt
+ no shut
+ exit
+
+vlan 8
+ name HVACInfrastructure
+ exit
+int vlan 8
+ description "interface to HVAC Infrastructure"
+ ip address 10.39.8.2 255.255.255.0
+ vrrp 8 ip 10.39.8.20
+ vrrp 8 priority 200
+ vrrp 8 preempt
+ no shut
+ exit
+
+vlan 9
+ name Storage
+ exit
+int vlan 9
+ description "interface to Storage"
+ ip address 10.39.9.2 255.255.255.0
+ vrrp 9 ip 10.39.9.20
+ vrrp 9 priority 200
+ vrrp 9 preempt
+ no shut
+ exit
+
+vlan 10
+ name NetMan
+ exit
+int vlan 10
+ description "interface to NetMan"
+ ip address 10.39.10.2 255.255.255.0
+ vrrp 10 ip 10.39.10.20
+ vrrp 10 priority 200
+ vrrp 10 preempt
+ no shut
+ exit
+
+vlan 11
+ name SecurityCameras
+ exit
+int vlan 11
+ description "interface to Security Cameras"
+ ip address 10.39.11.2 255.255.255.0
+ vrrp 11 ip 10.39.11.20
+ vrrp 11 priority 200
+ vrrp 11 preempt
+ no shut
+ exit
+
+vlan 12
+ name ServerOOBM
+ exit
+int vlan 12
+ description "interface to Server OOBM"
+ ip address 10.39.12.2 255.255.255.0
+ vrrp 12 ip 10.39.12.20
+ vrrp 12 priority 200
+ vrrp 12 preempt
+ no shut
+ exit
+
+vlan 13
+ name VLAN13
+ exit
+int vlan 13
+ description "interface to VLAN 13"
+ ip address 10.39.13.2 255.255.255.0
+ vrrp 13 ip 10.39.13.20
+ vrrp 13 priority 200
+ vrrp 13 preempt
+ no shut
+ exit
+
+vlan 14
+ name VLAN14
+ exit
+int vlan 14
+ description "interface to VLAN 14"
+ ip address 10.39.14.2 255.255.255.0
+ vrrp 14 ip 10.39.14.20
+ vrrp 14 priority 200
+ vrrp 14 preempt
+ no shut
+ exit
+
+vlan 15
+ name Routers
+ exit
+int vlan 15
+ description "interface to Routers"
+ ip address 10.39.15.2 255.255.255.0
+ vrrp 15 ip 10.39.15.20
+ vrrp 15 priority 200
+ vrrp 15 preempt
+ no shut
+ exit
+
+vlan 16
+ name Links
+ exit
+int vlan 16
+ description "interface to Links"
+ ip address 10.39.16.2 255.255.255.0
+ vrrp 16 ip 10.39.16.20
+ vrrp 16 priority 200
+ vrrp 16 preempt
+ no shut
+ exit
+
+vlan 998
+ name ClusterChat
+ exit
+
+vlan 999
+ name Native
+ exit
+
+vlan 1000
+ name Discard
+ exit
+
+
+# Access Ports
+int range gi0/0-3
+ description Clients
+ switchport access vlan 5
+ switchport port-security mac-address sticky
+ switchport port-security violation protect
+ negotiation auto
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+ exit
+
+int range gi1/0-3
+ description Servers
+ switchport access vlan 6
+ exit
+
+
+# Tagged Ports
+int range gi3/0-3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 2-16
+ exit
+exit
+wr mem
+
+
+spanning-tree vlan 1-4090 root primary
+
+ip routing
+
+wr mem

@@ -1,0 +1,6 @@
+nano .gitignore
+.DS_Store
+*.swp
+*.log
+*.tmp
+gns3/projects/*

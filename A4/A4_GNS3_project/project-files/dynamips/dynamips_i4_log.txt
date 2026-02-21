@@ -1,0 +1,10 @@
+Feb 21 11:24:40.549 HYPERVISOR: Release 0.2.23-amd64/Linux (tag 2023010200)
+Feb 21 11:24:40.549 HYPERVISOR: Started on IP = 127.0.0.1, TCP port = 41279.
+Feb 21 11:24:40.557 HYPERVISOR: exec_cmd: hypervisor version 
+Feb 21 11:24:40.557 HYPERVISOR: exec_cmd: hypervisor working_dir /home/student/GNS3/projects/A4/project-files/dynamips 
+Feb 21 11:24:40.557 GENERAL: working_dir=/home/student/GNS3/projects/A4/project-files/dynamips
+Feb 21 11:24:40.557 HYPERVISOR: exec_cmd: frsw create FRSW1 
+Feb 21 11:27:36.531 HYPERVISOR: exec_cmd: frsw delete FRSW1 
+Feb 21 11:27:36.532 HYPERVISOR: exec_cmd: hypervisor stop 
+Feb 21 11:27:36.753 HYPERVISOR: Stopped.
+Feb 21 11:27:36.753 GENERAL: reset done.
