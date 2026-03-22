@@ -1,0 +1,1 @@
+Formatting '/home/student/GNS3/projects/A5/project-files/qemu/0934f40e-5371-4b37-81aa-68f449e0add2/hdb_disk.qcow2', fmt=qcow2 cluster_size=65536 extended_l2=off compression_type=zlib size=1048576 backing_file=/home/student/GNS3/images/QEMU/IOSv_startup_config.img backing_fmt=raw lazy_refcounts=off refcount_bits=16

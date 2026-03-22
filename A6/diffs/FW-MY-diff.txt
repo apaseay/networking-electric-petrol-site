@@ -1,0 +1,304 @@
+# FW-MY - Maynooth Firewall Diff
+
+    set hostname "FW-MY"
+        set alias "WAN"
+        set ip 10.39.1.10 255.255.255.0
+        set allowaccess ping
+        set alias "Inside"
+        set device-identification enable
+        set lldp-transmission enable
+        set role lan
+        set ip 10.39.2.1 255.255.255.0
+        set allowaccess ping
+        set alias "DMZ"
+        set role dmz
+    edit "VPN-MY-to-HO"
+        set vdom "root"
+        set type tunnel
+        set snmp-index 13
+        set interface "port1"
+    next
+    edit "VPN-MY-to-DC1"
+        set vdom "root"
+        set type tunnel
+        set snmp-index 14
+        set interface "port1"
+    next
+    edit "VPN-MY-to-DC2"
+        set vdom "root"
+        set type tunnel
+        set snmp-index 15
+        set interface "port1"
+    next
+    edit 2
+        set dns-service default
+        set default-gateway 10.39.1.10
+        set netmask 255.255.255.0
+        set interface "port2"
+        config ip-range
+            edit 1
+                set start-ip 10.39.1.1
+                set end-ip 10.39.1.9
+            next
+            edit 2
+                set start-ip 10.39.1.11
+                set end-ip 10.39.1.254
+            next
+        end
+    next
+    edit "InsideLan"
+        set uuid 134dec0e-254b-51f1-79e3-a219b61b2e8b
+        set associated-interface "port2"
+        set color 16
+        set subnet 10.39.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-HO_local_subnet_1"
+        set uuid efa4d6e4-255b-51f1-234b-8ffc39866efa
+        set allow-routing enable
+        set subnet 10.39.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-HO_remote_subnet_1"
+        set uuid efa78e5c-255b-51f1-7c05-0224794c8bae
+        set allow-routing enable
+        set subnet 10.0.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-DC1_local_subnet_1"
+        set uuid 26dcc090-255c-51f1-d3bf-e5c79547ab04
+        set allow-routing enable
+        set subnet 10.39.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-DC1_remote_subnet_1"
+        set uuid 26dfe4d2-255c-51f1-bd03-a3dbe9800867
+        set allow-routing enable
+        set subnet 10.1.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-DC2_local_subnet_1"
+        set uuid 5a765eac-255c-51f1-6a47-636914f7a2fc
+        set allow-routing enable
+        set subnet 10.39.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-DC2_remote_subnet_1"
+        set uuid 5a7b1f5a-255c-51f1-dac8-ce2fd7324060
+        set allow-routing enable
+        set subnet 10.2.1.0 255.255.255.0
+    next
+    edit "VPN-MY-to-HO_local"
+        set uuid efa63dea-255b-51f1-fa3b-fb45ac22be78
+        set member "VPN-MY-to-HO_local_subnet_1"
+        set comment "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+        set allow-routing enable
+    next
+    edit "VPN-MY-to-HO_remote"
+        set uuid efa9d702-255b-51f1-7d6a-1bda35c52805
+        set member "VPN-MY-to-HO_remote_subnet_1"
+        set comment "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+        set allow-routing enable
+    next
+    edit "VPN-MY-to-DC1_local"
+        set uuid 26de84d4-255c-51f1-60a8-ceb2f34fe97f
+        set member "VPN-MY-to-DC1_local_subnet_1"
+        set comment "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+        set allow-routing enable
+    next
+    edit "VPN-MY-to-DC1_remote"
+        set uuid 26e1e4bc-255c-51f1-c6c7-edfc60b1e311
+        set member "VPN-MY-to-DC1_remote_subnet_1"
+        set comment "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+        set allow-routing enable
+    next
+    edit "VPN-MY-to-DC2_local"
+        set uuid 5a789622-255c-51f1-5abd-1732906174e6
+        set member "VPN-MY-to-DC2_local_subnet_1"
+        set comment "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+        set allow-routing enable
+    next
+    edit "VPN-MY-to-DC2_remote"
+        set uuid 5a7c828c-255c-51f1-2801-7abbafda0926
+        set member "VPN-MY-to-DC2_remote_subnet_1"
+        set comment "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+        set allow-routing enable
+    next
+config vpn ipsec phase1-interface
+    edit "VPN-MY-to-HO"
+        set interface "port1"
+        set peertype any
+        set net-device disable
+        set proposal des-md5 des-sha1
+        set comments "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+        set wizard-type static-fortigate
+        set remote-gw 192.168.122.229
+        set psksecret ENC tnF7WrkCvFEmVuiCpsCxhqf8UffFp2l4Cgctd3vaBR1e8c8tAmtQXzS7R9biDXw70eB7yG0dMqdEyvH+W9jJwFND+su/pkhhRLm569VU7mHIwFk1GgaiqfXb6czqkjhn5DWcwFQnC+zW+L7rzdMRpWAF7iLDnirjFMJtYk0UHnoPb8+5RKrMrzlV8eqrP8VCP5OJww==
+    next
+    edit "VPN-MY-to-DC1"
+        set interface "port1"
+        set peertype any
+        set net-device disable
+        set proposal des-md5 des-sha1
+        set comments "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+        set wizard-type static-fortigate
+        set remote-gw 192.168.122.143
+        set psksecret ENC o/JxfY0+g4Cxg2bG2LD0IdJQ3xVU+pb8TI6dITQUNVdb+3FQ4MKJ7pskoOJKD19qtes+0ULJZeE44bPrdJVCEQX0QlUmciWCHZU61ImVpmazhNxsPedGW2KC9MynhZMo7ChRTZX/XXvRXomImDLsawcRYZqgILMpfk8xvvXOb7DatAwqSFs1AXySZ4ii3mpRgnPe0Q==
+    next
+    edit "VPN-MY-to-DC2"
+        set interface "port1"
+        set peertype any
+        set net-device disable
+        set proposal des-md5 des-sha1
+        set comments "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+        set wizard-type static-fortigate
+        set remote-gw 192.168.122.6
+        set psksecret ENC PnWrhRM6zLGEujmBg26Tg66mM/XiAjgHyFo0JN2GYm7Y3SEvTSyYtc6PVn7rlaIBQ6X7iNSmhB3r/tjCjO4Go9M9g3NhnCzYvTbxtEi8T7PZprcQrqyAFnEccjCOypGSpp6PZi3yTPb2flo3YT4y2PDVKv0rRXeoek4w10j7oyAw63PPd8wFj2f+jgbMQ659RxRfCA==
+    next
+end
+config vpn ipsec phase2-interface
+    edit "VPN-MY-to-HO"
+        set phase1name "VPN-MY-to-HO"
+        set proposal des-md5 des-sha1
+        set comments "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+        set src-addr-type name
+        set dst-addr-type name
+        set src-name "VPN-MY-to-HO_local"
+        set dst-name "VPN-MY-to-HO_remote"
+    next
+    edit "VPN-MY-to-DC1"
+        set phase1name "VPN-MY-to-DC1"
+        set proposal des-md5 des-sha1
+        set comments "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+        set src-addr-type name
+        set dst-addr-type name
+        set src-name "VPN-MY-to-DC1_local"
+        set dst-name "VPN-MY-to-DC1_remote"
+    next
+    edit "VPN-MY-to-DC2"
+        set phase1name "VPN-MY-to-DC2"
+        set proposal des-md5 des-sha1
+        set comments "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+        set src-addr-type name
+        set dst-addr-type name
+        set src-name "VPN-MY-to-DC2_local"
+        set dst-name "VPN-MY-to-DC2_remote"
+    next
+end
+config firewall policy
+    edit 1
+        set name "Inside->Outside"
+        set uuid bea99fc0-254c-51f1-28e8-467772f14493
+        set srcintf "port2"
+        set dstintf "port1"
+        set srcaddr "InsideLan"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set nat enable
+    next
+    edit 2
+        set name "vpn_VPN-MY-to-HO_local_0"
+        set uuid efb1195e-255b-51f1-5864-dba8c3db16cb
+        set srcintf "port2"
+        set dstintf "VPN-MY-to-HO"
+        set srcaddr "VPN-MY-to-HO_local"
+        set dstaddr "VPN-MY-to-HO_remote"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set comments "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+    next
+    edit 3
+        set name "vpn_VPN-MY-to-HO_remote_0"
+        set uuid efbb67ba-255b-51f1-a9f8-07940f1ffc75
+        set srcintf "VPN-MY-to-HO"
+        set dstintf "port2"
+        set srcaddr "VPN-MY-to-HO_remote"
+        set dstaddr "VPN-MY-to-HO_local"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set comments "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+    next
+    edit 4
+        set name "vpn_VPN-MY-to-DC1_local_0"
+        set uuid 26eacc62-255c-51f1-2891-b3a086ef3395
+        set srcintf "port2"
+        set dstintf "VPN-MY-to-DC1"
+        set srcaddr "VPN-MY-to-DC1_local"
+        set dstaddr "VPN-MY-to-DC1_remote"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set comments "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+    next
+    edit 5
+        set name "vpn_VPN-MY-to-DC1_remote_0"
+        set uuid 26f7bee0-255c-51f1-de07-84cac9a0a8cc
+        set srcintf "VPN-MY-to-DC1"
+        set dstintf "port2"
+        set srcaddr "VPN-MY-to-DC1_remote"
+        set dstaddr "VPN-MY-to-DC1_local"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set comments "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+    next
+    edit 6
+        set name "vpn_VPN-MY-to-DC2_local_0"
+        set uuid 5a87ce76-255c-51f1-1778-a3da1850723c
+        set srcintf "port2"
+        set dstintf "VPN-MY-to-DC2"
+        set srcaddr "VPN-MY-to-DC2_local"
+        set dstaddr "VPN-MY-to-DC2_remote"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set comments "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+    next
+    edit 7
+        set name "vpn_VPN-MY-to-DC2_remote_0"
+        set uuid 5a8f9fb6-255c-51f1-2295-c9fafbca658e
+        set srcintf "VPN-MY-to-DC2"
+        set dstintf "port2"
+        set srcaddr "VPN-MY-to-DC2_remote"
+        set dstaddr "VPN-MY-to-DC2_local"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set comments "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+    next
+end
+config router static
+    edit 1
+        set device "VPN-MY-to-HO"
+        set comment "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+        set dstaddr "VPN-MY-to-HO_remote"
+    next
+    edit 2
+        set distance 254
+        set comment "VPN: VPN-MY-to-HO (Created by VPN wizard)"
+        set blackhole enable
+        set dstaddr "VPN-MY-to-HO_remote"
+    next
+    edit 3
+        set device "VPN-MY-to-DC1"
+        set comment "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+        set dstaddr "VPN-MY-to-DC1_remote"
+    next
+    edit 4
+        set distance 254
+        set comment "VPN: VPN-MY-to-DC1 (Created by VPN wizard)"
+        set blackhole enable
+        set dstaddr "VPN-MY-to-DC1_remote"
+    next
+    edit 5
+        set device "VPN-MY-to-DC2"
+        set comment "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+        set dstaddr "VPN-MY-to-DC2_remote"
+    next
+    edit 6
+        set distance 254
+        set comment "VPN: VPN-MY-to-DC2 (Created by VPN wizard)"
+        set blackhole enable
+        set dstaddr "VPN-MY-to-DC2_remote"
+    next
+end
+
+

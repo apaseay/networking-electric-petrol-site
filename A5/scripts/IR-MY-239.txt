@@ -1,0 +1,32 @@
+hostname IR-MY-239
+
+interface Loopback0
+ ip address 10.255.254.239 255.255.255.255
+
+interface GigabitEthernet0/0
+ ip address 10.39.15.239 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no shutdown
+
+interface GigabitEthernet0/1
+ ip address 10.39.5.239 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no shutdown
+
+interface GigabitEthernet0/2
+ ip address 10.39.6.239 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no shutdown
+
+router ospf 1
+ router-id 10.255.254.239
+ network 10.39.15.0 0.0.0.255 area 39
+ network 10.39.5.0 0.0.0.255 area 39
+ network 10.39.6.0 0.0.0.255 area 39
+ network 10.255.254.239 0.0.0.0 area 39

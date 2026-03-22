@@ -1,0 +1,18 @@
+Mar 13 21:42:54.174 HYPERVISOR: Release 0.2.23-amd64/Linux (tag 2023010200)
+Mar 13 21:42:54.174 HYPERVISOR: Started on IP = 127.0.0.1, TCP port = 41855.
+Mar 13 21:42:54.177 HYPERVISOR: exec_cmd: hypervisor version 
+Mar 13 21:42:54.178 HYPERVISOR: exec_cmd: hypervisor working_dir /home/student/GNS3/projects/A5/project-files/dynamips 
+Mar 13 21:42:54.178 GENERAL: working_dir=/home/student/GNS3/projects/A5/project-files/dynamips
+Mar 13 21:42:54.178 HYPERVISOR: exec_cmd: ethsw create Switch1(WANBackbone) 
+Mar 13 21:42:54.423 HYPERVISOR: exec_cmd: nio create_udp udp-a08a69fe-8ae1-4af0-b181-e55940afdd9b 10000 127.0.0.1 10001 
+Mar 13 21:42:54.423 HYPERVISOR: exec_cmd: ethsw add_nio Switch1(WANBackbone) udp-a08a69fe-8ae1-4af0-b181-e55940afdd9b 
+Mar 13 21:42:54.427 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1(WANBackbone) udp-a08a69fe-8ae1-4af0-b181-e55940afdd9b 1 
+Mar 13 21:42:54.476 HYPERVISOR: exec_cmd: nio create_udp udp-12d37523-75a0-4efa-8026-d61f5664c50f 10003 127.0.0.1 10002 
+Mar 13 21:42:54.476 HYPERVISOR: exec_cmd: ethsw add_nio Switch1(WANBackbone) udp-12d37523-75a0-4efa-8026-d61f5664c50f 
+Mar 13 21:42:54.488 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1(WANBackbone) udp-12d37523-75a0-4efa-8026-d61f5664c50f 1 
+Mar 13 21:42:54.520 HYPERVISOR: exec_cmd: nio create_udp udp-23043fe6-3788-4f2c-9fce-9d8cf1f7e704 10004 127.0.0.1 10005 
+Mar 13 21:42:54.520 HYPERVISOR: exec_cmd: ethsw add_nio Switch1(WANBackbone) udp-23043fe6-3788-4f2c-9fce-9d8cf1f7e704 
+Mar 13 21:42:54.528 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1(WANBackbone) udp-23043fe6-3788-4f2c-9fce-9d8cf1f7e704 1 
+Mar 13 21:42:54.577 HYPERVISOR: exec_cmd: nio create_udp udp-63595341-d2c0-4235-8637-8bb0965acfb4 10007 127.0.0.1 10006 
+Mar 13 21:42:54.577 HYPERVISOR: exec_cmd: ethsw add_nio Switch1(WANBackbone) udp-63595341-d2c0-4235-8637-8bb0965acfb4 
+Mar 13 21:42:54.588 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1(WANBackbone) udp-63595341-d2c0-4235-8637-8bb0965acfb4 1 

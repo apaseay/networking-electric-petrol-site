@@ -1,0 +1,32 @@
+hostname IR-DC2-201
+
+interface Loopback0
+ ip address 10.255.254.201 255.255.255.255
+
+interface GigabitEthernet0/0
+ ip address 10.2.15.201 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no shutdown
+
+interface GigabitEthernet0/1
+ ip address 10.2.5.201 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no shutdown
+
+interface GigabitEthernet0/2
+ ip address 10.2.6.201 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+ no shutdown
+
+router ospf 1
+ router-id 10.255.254.201
+ network 10.2.15.0 0.0.0.255 area 2
+ network 10.2.5.0 0.0.0.255 area 2
+ network 10.2.6.0 0.0.0.255 area 2
+ network 10.255.254.201 0.0.0.0 area 2
