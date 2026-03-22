@@ -1,9 +1,10 @@
 # A6 — Perimeter Firewall Design with FortiGate
 
-**Student:** Ayobami Pase
-**Student ID:** L00196785
+```
+**Student:** Pase Ayobami
 **Site Allocation:** Maynooth — Network `10.39.0.0/16`
-**Date:** March 2026
+**Date:** 22nd March 2026
+```
 
 
 ## Diagram
