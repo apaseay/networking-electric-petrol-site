@@ -1,7 +1,7 @@
 # A6 — Perimeter Firewall Design with FortiGate
 
 ```
-**Student:** Pase Ayobami
+**Author:** Pase Ayobami
 **Site Allocation:** Maynooth — Network `10.39.0.0/16`
 **Date:** 22nd March 2026
 ```
